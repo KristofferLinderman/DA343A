@@ -24,3 +24,6 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY de.fu_berlin.inf.dpp 2 0 2016-01-18 13:51:45.334
 !MESSAGE received no response from STUN server stunserver.org/69.172.201.208:3478 at local address /10.2.6.199:0 (StunServiceImpl.java:420)
+
+!ENTRY org.eclipse.ui 4 4 2016-01-18 13:57:37.864
+!MESSAGE Referenced part does not exist yet: org.eclipse.ui.views.TaskList.
