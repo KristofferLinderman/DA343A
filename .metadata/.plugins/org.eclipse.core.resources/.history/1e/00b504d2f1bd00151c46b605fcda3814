@@ -1,0 +1,35 @@
+package laboration1;
+
+
+public class DStringTest {
+
+	public void testAppendDString() {
+		DString dstring1 = new DString(1);
+		DString dstring2 = new DString();
+
+		dstring1.append('A');
+		dstring2.append('B');
+		dstring2.append('C');
+
+		dstring1.append(dstring2);
+
+		for (int i = 0; i < 3; i++) {
+			System.out.print(dstring1.charAt(i) + " ");
+		}
+	}
+	
+	public void testDelete(){
+		DString dstring = new DString("Hello");
+		dstring.delete(2, 4);
+		
+		for (int i = 0; i < dstring.length(); i++) {
+			System.out.print(dstring.charAt(i) + " ");
+		}
+	}
+
+	public static void main(String[] args) {
+		DStringTest dTest= new DStringTest();
+//		dTest.testAppendDString();
+		dTest.testDelete();
+	}
+}

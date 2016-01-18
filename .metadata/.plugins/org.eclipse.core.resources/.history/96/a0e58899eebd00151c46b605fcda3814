@@ -1,0 +1,10 @@
+package laboration1;
+
+public class DStringTest {
+
+	
+	public static void main(String[] args) {
+		DString dstring1 = new DString();
+		DString dstring2 = new DString();
+	}
+}
