@@ -1,0 +1,25 @@
+package laboration11;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.util.ArrayList;
+
+public class SuperUDPServer {
+	
+	private ArrayList<String> words = new ArrayList<String>();
+    private Thread server = new Thread();
+    private DatagramSocket socket;
+    
+    public SuperUDPServer(int requestPort) {
+        System.out.println("Server: Start av UDPServer, Lyssnar på "+requestPort);
+        try {
+            socket = new DatagramSocket(requestPort);
+            server.start();
+        } catch(Exception e) { System.out.println(e);}
+    }
+    
+    public void run() {
+       
+    }
+
+}

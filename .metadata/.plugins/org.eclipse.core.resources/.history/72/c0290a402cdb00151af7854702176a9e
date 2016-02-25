@@ -1,0 +1,18 @@
+package laboration12;
+
+import java.net.Socket;
+
+public class CalcController {
+	
+	private Socket socket;
+	private String ipAddress;
+	private int port;
+
+	public CalcController(){
+		
+	}
+	public void newCalculation(String text, String text2, String operation) {
+		
+	}
+
+}

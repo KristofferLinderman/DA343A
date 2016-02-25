@@ -1,0 +1,20 @@
+package laboration11;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+
+public class UDPCalculator extends JPanel implements ActionListener {
+	private SuperUDPClient client;
+
+	public UDPCalculator(SuperUDPClient client) {
+		this.client = client;
+		
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+	}
+
+}

@@ -1,0 +1,76 @@
+INFO  2016-01-21 11:13:37,861 (Saros.java:220) Starting Saros 14.10.31 running:
+  Java Version: 1.8.0_66
+  Java Vendor: Oracle Corporation
+  Eclipse Runtime Version: 3.11.1.v20150903-1804
+  Operating System: Mac OS X (10.11.2)
+  Hardware Architecture: x86_64
+INFO  2016-01-21 11:13:37,970 (SarosContext.java:153) creating Saros runtime context...
+DEBUG 2016-01-21 11:13:38,014 (XMPPAccountStore.java:117) loading accounts from file: /Users/Kristoffer/.saros/config.dat
+DEBUG 2016-01-21 11:13:38,357 (XMPPAccountStore.java:176) loaded 1 account(s)
+INFO  2016-01-21 11:13:38,710 (SarosContext.java:199) successfully created Saros runtime context
+DEBUG 2016-01-21 11:13:38,753 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+INFO  2016-01-21 11:13:38,795 (PreferenceInitializer.java:50) initializing preference default values
+DEBUG 2016-01-21 11:13:38,914 (SarosAnnotation.java:117) resetting annotation colors
+DEBUG 2016-01-21 11:13:39,123 (Saros.java:430) skipping conversion of old XMPP accounts, because there are already new ones
+DEBUG 2016-01-21 11:13:44,881 (SharedDocumentProvider.java:77) SharedDocumentProvider created by Eclipse
+DEBUG 2016-01-21 11:13:49,586 (WhiteboardManager.java:194) WhiteboardManager instantiated
+DEBUG 2016-01-21 11:13:49,630 (DocumentRecord.java:93) Added Node: attr(145337122962535026) name=svg
+DEBUG 2016-01-21 11:13:49,695 (XMPPConnectionService.java:439) started Socks5 proxy on port: 7777 [listening on all interfaces]
+DEBUG 2016-01-21 11:13:49,698 (XMPPConnectionService.java:459) using autodetected addresses: [10.2.6.199, fe80:0:0:0:902f:68ff:feef:c230%awdl0, fe80:0:0:0:3e15:c2ff:fec5:9cb4%en0]
+DEBUG 2016-01-21 11:13:49,716 (XMPPConnectionService.java:398)  new connection state == CONNECTING
+DEBUG 2016-01-21 11:13:51,173 (XMPPConnectionService.java:398) ellumination@saros-con.imp.fu-berlin.de/Saros new connection state == CONNECTED
+DEBUG 2016-01-21 11:13:51,173 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+DEBUG 2016-01-21 11:13:51,176 (SkypeManager.java:289) Refreshing Skype username cache...
+WARN  2016-01-21 11:13:59,889 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/69.172.201.208:3478 at local address /10.2.6.199:0
+ERROR 2016-01-21 14:43:32,138 (XMPPConnectionService.java:101) XMPP connection error: 
+java.net.SocketException: Operation timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:930)
+	at sun.security.ssl.AppInputStream.read(AppInputStream.java:105)
+	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
+	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
+	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
+	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+	at java.io.BufferedReader.fill(BufferedReader.java:161)
+	at java.io.BufferedReader.read1(BufferedReader.java:212)
+	at java.io.BufferedReader.read(BufferedReader.java:286)
+	at org.xmlpull.mxp1.MXParser.fillBuf(MXParser.java:2992)
+	at org.xmlpull.mxp1.MXParser.more(MXParser.java:3046)
+	at org.xmlpull.mxp1.MXParser.nextImpl(MXParser.java:1144)
+	at org.xmlpull.mxp1.MXParser.next(MXParser.java:1093)
+	at org.jivesoftware.smack.PacketReader.parsePackets(PacketReader.java:312)
+	at org.jivesoftware.smack.PacketReader.access$000(PacketReader.java:48)
+	at org.jivesoftware.smack.PacketReader$1.run(PacketReader.java:76)
+ERROR 2016-01-21 14:43:32,150 (XMPPConnectionService.java:400)  new connection state == ERROR
+java.net.SocketException: Operation timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:930)
+	at sun.security.ssl.AppInputStream.read(AppInputStream.java:105)
+	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
+	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
+	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
+	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+	at java.io.BufferedReader.fill(BufferedReader.java:161)
+	at java.io.BufferedReader.read1(BufferedReader.java:212)
+	at java.io.BufferedReader.read(BufferedReader.java:286)
+	at org.xmlpull.mxp1.MXParser.fillBuf(MXParser.java:2992)
+	at org.xmlpull.mxp1.MXParser.more(MXParser.java:3046)
+	at org.xmlpull.mxp1.MXParser.nextImpl(MXParser.java:1144)
+	at org.xmlpull.mxp1.MXParser.next(MXParser.java:1093)
+	at org.jivesoftware.smack.PacketReader.parsePackets(PacketReader.java:312)
+	at org.jivesoftware.smack.PacketReader.access$000(PacketReader.java:48)
+	at org.jivesoftware.smack.PacketReader$1.run(PacketReader.java:76)
+DEBUG 2016-01-21 14:43:32,153 (XMPPConnectionService.java:398)  new connection state == NOT_CONNECTED
+DEBUG 2016-01-21 19:44:01,954 (UPnPServiceImpl.java:295) deleting existing port mappings

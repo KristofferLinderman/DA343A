@@ -46,6 +46,24 @@ public class DStringTest {
 		str1.delete(2).delete(4,6).delete(8);
 		System.out.println(str1);
 	}
+	
+	public void testReverse(){
+		DString str1 = new DString("HELLO!");
+		str1.reverse();
+		System.out.println(str1);
+	}
+	
+	public void testEquals(){
+		DString str1 = new DString("Hello");
+		DString str2 = new DString("Hell");
+		DString str3 = new DString("Greetings");
+		double temp = 12;
+		
+		System.out.println(str1.equals(str2));
+		System.out.println(str1.equals(str3));
+		System.out.println(str1.equals(temp));
+		
+	}
 
 	public static void main(String[] args) {
 		DStringTest dTest = new DStringTest();
@@ -53,6 +71,8 @@ public class DStringTest {
 //		dTest.testDelete();
 //		dTest.testSubstring();
 //		dTest.testIndexOf();
-		dTest.testChaining();
+//		dTest.testChaining();
+//		dTest.testReverse();
+		dTest.testEquals();
 	}
 }

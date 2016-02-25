@@ -1,0 +1,5 @@
+package laboration12;
+
+public interface CalcController {
+
+}

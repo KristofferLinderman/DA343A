@@ -73,3 +73,4 @@ java.net.SocketException: No route to host
 	at org.jivesoftware.smack.PacketReader.access$000(PacketReader.java:48)
 	at org.jivesoftware.smack.PacketReader$1.run(PacketReader.java:76)
 DEBUG 2016-01-18 15:29:58,311 (XMPPConnectionService.java:398)  new connection state == NOT_CONNECTED
+DEBUG 2016-01-18 18:12:32,733 (UPnPServiceImpl.java:295) deleting existing port mappings

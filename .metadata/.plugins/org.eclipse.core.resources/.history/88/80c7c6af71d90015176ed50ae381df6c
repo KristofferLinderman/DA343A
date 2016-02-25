@@ -1,0 +1,29 @@
+package laboration11;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+import java.util.ArrayList;
+
+public class SuperUDPServer {
+	
+	private DatagramPacket packet;
+	private DatagramSocket socket;
+    
+    public SuperUDPServer(int requestPort) {
+    	try {
+			socket = new DatagramSocket(1337);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    public void run() {
+    	String request;
+    	byte[] data = new byte[1024]; // tillräckligt stor buffert
+    	packet = new DatagramPacket(data, data.length); socket.receive(packet); // blocking
+    	request = new String(packet.getData(), 0, packet.getLength());
+    }
+
+}

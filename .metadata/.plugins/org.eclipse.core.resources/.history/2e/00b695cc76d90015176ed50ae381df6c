@@ -1,0 +1,68 @@
+package laboration11;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+import java.util.ArrayList;
+
+public class SuperUDPServer implements Runnable {
+
+	private DatagramPacket packet;
+	private DatagramSocket socket;
+	private Thread server;
+
+	public SuperUDPServer(int requestPort) {
+		System.out.println("Requested port: " + requestPort);
+		try {
+			socket = new DatagramSocket(requestPort);
+			server = new Thread(this);
+			server.start();
+
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void run() {
+		String request;
+		byte[] response;
+		byte[] data = new byte[128];
+		String[] inputArray;
+		int nbr1, nbr2;
+		double calculationResult;
+		char operator;
+		try {
+
+			packet = new DatagramPacket(data, data.length);
+			socket.receive(packet);
+			request = new String(packet.getData(), 0, packet.getLength());
+
+			inputArray = request.split(",");
+
+			nbr1 = Integer.parseInt(inputArray[0]);
+			nbr2 = Integer.parseInt(inputArray[1]);
+
+			switch (operator = inputArray[3].charAt(0)) {
+			case '+':
+				calculationResult = nbr1 + nbr2;
+				break;
+			case '-':
+				calculationResult = nbr1 - nbr2;
+				break;
+			case '*':
+				calculationResult = nbr1 * nbr2;
+				break;
+			case '/':
+				calculationResult = nbr1 / nbr2;
+				break;
+			}
+
+			socket.send(p);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

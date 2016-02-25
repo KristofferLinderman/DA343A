@@ -1,0 +1,27 @@
+package laboration11;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+
+public class UDPCalculator extends JPanel implements ActionListener {
+	private SuperUDPClient client;
+
+	public UDPCalculator(SuperUDPClient client) {
+		this.client = client;
+		setLayout(new BorderLayout());
+		
+		setPreferredSize(new Dimension(300, 200));
+		
+		
+		
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+	}
+
+}

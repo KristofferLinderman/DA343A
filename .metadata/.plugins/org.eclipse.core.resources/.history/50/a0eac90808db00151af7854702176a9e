@@ -1,0 +1,27 @@
+package laboration12;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class QuizClient {
+
+	private Socket socket;
+	private String ipAddress;
+	private int port;
+
+	public QuizClient(String ipAddress, int port) {
+		this.ipAddress = ipAddress;
+		this.port = port;
+		
+	}
+	
+	public void connect() throws IOException{
+		socket = new Socket(ipAddress, port);
+	}
+
+
+
+
+}

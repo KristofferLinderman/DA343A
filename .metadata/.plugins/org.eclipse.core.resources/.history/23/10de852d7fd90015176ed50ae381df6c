@@ -1,0 +1,35 @@
+package laboration11;
+
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class SuperUDPClient {
+	private InetAddress to;
+	private DatagramSocket socket;
+	private Thread client;
+	private UDPCalculator panel = new UDPCalculator(this);
+
+	public SuperUDPClient(int port, String ipAddress) {
+		try {
+			to = InetAddress.getByName(ipAddress);
+			socket = new DatagramSocket(0);
+			client = new Thread();
+			createWindow();
+		} catch (UnknownHostException | SocketException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void createWindow() {
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+}

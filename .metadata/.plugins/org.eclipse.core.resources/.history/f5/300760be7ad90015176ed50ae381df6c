@@ -1,0 +1,21 @@
+package laboration11;
+
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+public class SuperUDPClient {
+	private InetAddress to;
+	private DatagramSocket socket;
+
+	public SuperUDPClient(String host) {
+		try {
+			to = InetAddress.getByName(host);
+			socket = new DatagramSocket(0);
+		} catch (UnknownHostException | SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
