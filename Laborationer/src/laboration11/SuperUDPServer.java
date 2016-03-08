@@ -32,45 +32,45 @@ public class SuperUDPServer implements Runnable {
 		double calculationResult = 0;
 		char operator;
 		try {
-			while(true){
-			packet = new DatagramPacket(data, data.length);
-			socket.receive(packet);
-			request = new String(packet.getData(), 0, packet.getLength());
+			while (true) {
+				packet = new DatagramPacket(data, data.length);
+				socket.receive(packet);
+				request = new String(packet.getData(), 0, packet.getLength());
 
-			inputArray = request.split(",");
+				inputArray = request.split(",");
 
-			nbr1 = Integer.parseInt(inputArray[0]);
-			nbr2 = Integer.parseInt(inputArray[1]);
+				nbr1 = Integer.parseInt(inputArray[0]);
+				nbr2 = Integer.parseInt(inputArray[1]);
 
-			switch (operator = inputArray[2].charAt(0)) {
-			case '+':
-				calculationResult = nbr1 + nbr2;
-				break;
-			case '-':
-				calculationResult = nbr1 - nbr2;
-				break;
-			case '*':
-				calculationResult = nbr1 * nbr2;
-				break;
-			case '/':
-				calculationResult = (double) nbr1 / nbr2;
-				break;
-			}
-			
-			// Creates a byte array with the complete result from the calculation
-			result = calculationResult + " , " + nbr1 + " " + operator + " " + nbr2;
-			response = result.getBytes();
-			System.out.println(packet.getPort());
-			// Creates a new DatagramPacket and try to send as a response
-			packet = new DatagramPacket(response, response.length,packet.getAddress(),packet.getPort());
-			
-			socket.send(packet);
+				switch (operator = inputArray[2].charAt(0)) {
+				case '+':
+					calculationResult = nbr1 + nbr2;
+					break;
+				case '-':
+					calculationResult = nbr1 - nbr2;
+					break;
+				case '*':
+					calculationResult = nbr1 * nbr2;
+					break;
+				case '/':
+					calculationResult = (double) nbr1 / nbr2;
+					break;
+				}
+
+				// Creates a byte array with the complete result from the
+				// calculation
+				result = calculationResult + " , " + nbr1 + " " + operator + " " + nbr2;
+				response = result.getBytes();
+				System.out.println(packet.getPort());
+				// Creates a new DatagramPacket and try to send as a response
+				packet = new DatagramPacket(response, response.length, packet.getAddress(), packet.getPort());
+
+				socket.send(packet);
 
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }

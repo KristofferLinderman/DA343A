@@ -1,12 +1,9 @@
 package laboration12;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class CalcControllerD implements CalcController {
 
@@ -18,18 +15,14 @@ public class CalcControllerD implements CalcController {
 	private CalcUI gui;
 
 	public CalcControllerD() {
-		ipAddress = "195.178.232.7";
+		ipAddress = "localhost";
 		port = 3453;
-		System.out.println("started");
 
 		//QUESTION Output has to be before input to work??
 		try {
 			socket = new Socket(ipAddress, port);
-			System.out.println("1,1");
 			outputStream = new ObjectOutputStream(socket.getOutputStream());
-			System.out.println("1,2");
 			inputStream = new ObjectInputStream(socket.getInputStream());
-			System.out.println("1,3");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,6 +40,7 @@ public class CalcControllerD implements CalcController {
 
 		try {
 			outputStream.writeObject(new Expression(nbr1D, nbr2D, oper));
+			System.out.println("yolo");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -62,13 +56,13 @@ public class CalcControllerD implements CalcController {
 					gui.setResult("" + response.getResult());
 				}
 			} catch (IOException|ClassNotFoundException e) {
-				System.out.println(e);
+				e.printStackTrace();
 			}
 			try {
 				socket.close();
 			} catch (IOException e) {
 			}
-//			gui.setResult("Disconneting from server");
+			gui.setResult("Disconneting from server");
 		}
 	}
 }

@@ -1,9 +1,0 @@
-package laboration12;
-
-public class CalcController {
-
-	public void newCalculation(String text, String text2, String operation) {
-
-	}
-
-}

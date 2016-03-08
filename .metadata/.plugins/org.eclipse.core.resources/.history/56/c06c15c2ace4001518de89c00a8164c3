@@ -1,0 +1,24 @@
+package p1;
+
+/**
+ * Class to manage IconProducers
+ * @author Pierre Lejdbring
+ *
+ */
+public class IconProducerManager {
+
+	private Buffer<IconProducer> buffer;
+	
+	public IconProducerManager(Buffer<IconProducer> buffer) {
+		this.buffer = buffer;
+	}
+	
+	/**
+	 * Adds an IconProducer object to the Buffer inside IconProducerManager
+	 * @param iconProducer
+	 */
+	public void addIconProducer(IconProducer iconProducer) {
+		buffer.put(iconProducer);
+	}
+	
+}

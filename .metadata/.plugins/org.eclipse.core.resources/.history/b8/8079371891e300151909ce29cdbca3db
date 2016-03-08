@@ -1,0 +1,35 @@
+package p2;
+
+public class IconClient {
+
+	public IconClient(String ipAddress, int serverPort) {
+		new Connection(ipAddress, serverPort);
+	}
+
+	private class Connection extends Thread {
+		private String ipAddress;
+		private int serverPort;
+
+		public Connection(String ipAddress, int serverPort) {
+			this.ipAddress = ipAddress;
+			this.serverPort = serverPort;
+		}
+
+		public void run() {
+			long time = System.currentTimeMillis();
+			try (Socket socket = new Socket(ipAddress, serverPort);
+					DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+					DataInputStream dis = new DataInputStream(socket.getInputStream())) {
+
+				dos.writeUTF(ticket);
+				dos.flush();
+
+				result = dis.readUTF();
+				time = System.currentTimeMillis() - time;
+				System.out.println(name + ", time: " + time + ", Result: " + result + ", ticket=" + ticket);
+			} catch (Exception e) {
+			}
+		}
+	}
+
+}

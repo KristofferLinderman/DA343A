@@ -1,0 +1,9 @@
+package p2;
+
+public class IconClient {
+
+	public IconClient(String string, int i) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

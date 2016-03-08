@@ -1,0 +1,42 @@
+package p1;
+
+import java.util.Observable;
+
+import javax.swing.Icon;
+
+public class IconManager extends Observable{
+
+	private Buffer<Icon> iconBuffer;
+	private ICThread ict = null;
+	private Icon icon;
+	
+	public IconManager(Buffer<Icon> iconBuffer) {
+		this.iconBuffer = iconBuffer;
+	}
+	
+	public void start() {
+		if(ict == null) {
+			ict = new ICThread();
+			ict.start();
+		}
+	}
+	
+	public Icon getIcon() {
+		return icon;
+	}
+	
+	private class ICThread extends Thread {
+		public void run() {
+			while (true) {
+				try {
+					icon = iconBuffer.get();
+					setChanged();
+					notifyObservers(icon);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} 
+			}
+		}
+	}
+	
+}

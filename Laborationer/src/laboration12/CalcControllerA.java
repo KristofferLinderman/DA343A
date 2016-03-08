@@ -27,7 +27,8 @@ public class CalcControllerA implements CalcController{
 
 		try {
 
-			socket = new Socket(ipAddress, port);
+			socket = new Socket("localhost", port);
+			socket.setSoTimeout(5000);
 			inputStream = new DataInputStream(socket.getInputStream());
 			outputStream = new DataOutputStream(socket.getOutputStream());
 

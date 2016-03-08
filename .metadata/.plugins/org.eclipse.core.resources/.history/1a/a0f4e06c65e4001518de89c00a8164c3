@@ -1,0 +1,79 @@
+package laboration13;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import laboration12.Expression;
+
+public class CalcServerD implements Runnable {
+	private Calculator calculator;
+	private ServerSocket serverSocket;
+
+	public CalcServerD(Calculator calculator, int port) {
+		try {
+			this.calculator = calculator;
+			serverSocket = new ServerSocket(port);
+			new Thread(this).start();
+		} catch (IOException e) {
+		}
+	}
+
+	public void run() {
+		System.out.println("Server D started");
+
+		// creates a new thread (ClientListener) for each accepted connection
+		// made
+		try {
+			Socket socket = serverSocket.accept();
+			new ClientListener(socket).start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// A tread that listens for requests without closing the connection between
+	// requests.
+	private class ClientListener extends Thread {
+		private Socket socket;
+		private ObjectOutputStream outputStream;
+		private ObjectInputStream inputStream;
+
+		public ClientListener(Socket socket) {
+			this.socket = socket;
+			outputStream = new ObjectOutputStream(socket.getOutputStream());
+			inputStream = new ObjectInputStream(socket.getInputStream());
+		}
+
+		public void run() {
+			Expression request;
+			double answer;
+			String response;
+
+			try {
+
+				while (true) {
+					System.out.println("1");
+					request = (Expression) inputStream.readObject();
+					System.out.println("2");
+					answer = calculator.calculate(request);
+					System.out.println("3");
+					response = answer + "\n" + request.toString() + " = " + answer;
+
+					outputStream.writeUTF(response);
+					outputStream.flush();
+				}
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		new CalcServerD(new Calculator(), 3453);
+	}
+}

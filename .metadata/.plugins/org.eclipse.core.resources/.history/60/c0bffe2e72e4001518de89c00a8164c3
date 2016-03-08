@@ -1,0 +1,45 @@
+package p2;
+
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.util.Observable;
+import javax.swing.Icon;
+
+public class IconClient extends Observable {
+	private Icon icon;
+
+	public IconClient(String ipAddress, int serverPort) {
+		new Connection(ipAddress, serverPort).start();
+	}
+
+	public void notifyIcon(Icon icon) {
+		setChanged();
+		notifyObservers(icon);
+	}
+
+	private class Connection extends Thread {
+		private String ipAddress;
+		private int serverPort;
+
+		public Connection(String ipAddress, int serverPort) {
+			this.ipAddress = ipAddress;
+			this.serverPort = serverPort;
+		}
+
+		public void run() {
+			try (Socket socket = new Socket(ipAddress, serverPort);
+					ObjectInputStream input = new ObjectInputStream(socket.getInputStream())) {
+
+				while (true) {
+					System.out.println("in the client");
+					icon = (Icon) input.readObject();
+					System.out.println("Yolo-mode" + icon.toString());
+					notifyIcon(icon);
+					System.out.println(icon.toString());
+				}
+			} catch (Exception e) {
+			}
+		}
+	}
+
+}

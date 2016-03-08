@@ -16,7 +16,7 @@ public class CalcControllerC implements CalcController {
 	private CalcUI gui;
 
 	public CalcControllerC() {
-		ipAddress = "195.178.232.7";
+		ipAddress = "localhost";
 		port = 3452;
 
 		try {

@@ -1,0 +1,48 @@
+package laboration13;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class CalcServerB implements Runnable {
+	private Calculator calculator;
+	private ServerSocket serverSocket;
+
+	public CalcServerB(Calculator calculator, int port) {
+		try {
+			this.calculator = calculator;
+			serverSocket = new ServerSocket(port);
+			new Thread(this).start();
+		} catch (IOException e) {
+		}
+	}
+
+	public void run() {
+		System.out.println("Server started");
+		
+		try {
+			Socket socket = serverSocket.accept();
+			new ClientListener(socket).start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private class ClientListener extends Thread{
+		private Socket socket;
+		
+		public ClientListener(Socket socket){
+			this.socket = socket;
+		}
+		
+		public void run(){
+			
+		}
+	}
+
+	public static void main(String[] args) {
+		new CalcServerB(new Calculator(), 3451);
+	}
+}
