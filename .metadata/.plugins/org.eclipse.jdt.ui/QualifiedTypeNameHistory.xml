@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="p1.Viewer.IconObserver"/>
 <fullyQualifiedTypeName name="p1.IconManager.IconThread"/>
 <fullyQualifiedTypeName name="laboration8.Concurrency"/>
 <fullyQualifiedTypeName name="java.net.UnknownHostException"/>
@@ -42,7 +41,6 @@
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="p2.Buffer"/>
 <fullyQualifiedTypeName name="p2.IconClient.Connection"/>
-<fullyQualifiedTypeName name="javax.swing.Icon"/>
 <fullyQualifiedTypeName name="javafx.beans.Observable"/>
 <fullyQualifiedTypeName name="java.util.Observable"/>
 <fullyQualifiedTypeName name="java.util.Observer"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="laboration12.Calculation"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
 <fullyQualifiedTypeName name="java.net.Socket"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="javax.swing.Icon"/>
 </qualifiedTypeNameHistroy>

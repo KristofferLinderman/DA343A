@@ -1,0 +1,49 @@
+package p2;
+
+import javax.swing.Icon;
+
+/** Producer is a Thread that receives two Buffer objects when initiated.
+ *  One storing objects that implements the IconProducer interface and
+ *  one storing objects implementing the Icon interface. The run() method 
+ *  moves the objects from the <IconProducer> buffer to the <Icon> buffer
+ * @author johan
+ *
+ */
+
+public class Producer extends Thread
+{
+	private Buffer<IconProducer> prodBuffer = new Buffer<IconProducer>();
+	private Buffer<Icon> iconBuffer = new Buffer<Icon>();
+
+	public Producer(Buffer<IconProducer> prodBuffer, Buffer<Icon> iconBuffer)
+	{
+		this.prodBuffer = prodBuffer;
+		this.iconBuffer = iconBuffer;
+	}
+	
+	/**  Moves the objects from the <IconProducer> Buffer to the <Icon> Buffer
+	 * 
+	 */
+
+	public void run()
+	{
+		IconProducer prod;
+		int times;
+		
+		try
+		{
+			prod = prodBuffer.get();
+			times = prod.times() * prod.size();
+	
+		for (int n = 0; n < times; n++)
+		{
+				Thread.sleep(prod.delay());
+				iconBuffer.put(prod.nextIcon());
+		}
+		
+		} catch (InterruptedException e)
+		{
+		 e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,59 @@
+package p2;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.util.LinkedList;
+
+import javax.swing.Icon;
+
+public class IconClient 
+{
+	private Socket socket;
+	private ObjectInputStream inputStream;
+	private LinkedList <ManagerListener> list = new LinkedList <ManagerListener>();
+	private Listener thread;
+	
+	public IconClient(String ip, int port)
+	{
+		try
+		{
+			socket = new Socket (ip, port);
+			inputStream = new ObjectInputStream(socket.getInputStream());
+			thread = new Listener();
+			thread.start();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private class Listener extends Thread
+	{
+		
+		public void run()
+		{
+			Icon icon;
+			while (Thread.interrupted() == false)
+			{
+				try
+				{
+					icon = (Icon) inputStream.readObject();
+					for (ManagerListener ml : list)
+						ml.newIcon(icon);
+					
+					//seticon
+				} catch (ClassNotFoundException | IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void addManagerListener(ManagerListener listener)
+	{
+		list.add(listener);
+	}
+}

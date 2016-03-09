@@ -1,0 +1,42 @@
+package p2;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Viewer extends JPanel {
+	private JLabel lblIcon = new JLabel();
+	private ShowIcon listener = new ShowIcon();
+	
+	public Viewer(int width, int height) {
+		setLayout(new FlowLayout(FlowLayout.CENTER));
+		lblIcon.setOpaque(true);
+		add(lblIcon);
+		setPreferredSize(new Dimension(width,height));
+	}
+	
+	public Viewer(IconManager iconManager, int width, int height) {
+		this(width,height);
+		iconManager.addManagerListener(listener);
+	}
+	
+	public Viewer(IconClient client, int width, int height) {
+		this(width,height);
+		client.addManagerListener(listener);
+	}
+
+	public void setIcon(Icon icon) {
+		lblIcon.setIcon(icon);
+	}
+	
+	private class ShowIcon implements ManagerListener
+	{
+		public void newIcon(Icon icon)
+		{
+			setIcon(icon);
+		}
+	}
+}

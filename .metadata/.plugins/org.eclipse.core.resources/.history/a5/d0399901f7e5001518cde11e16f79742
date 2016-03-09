@@ -1,0 +1,110 @@
+package p2;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+/** FileProducer implements the IconProducer interface. FileProducer
+ *  reads int delay, int times and filepaths to JPG files. The files are
+ *  then saved as Icon objects and stored in an ArrayList. 
+ * 
+ * @author johan
+ *
+ */
+
+public class FileProducer implements IconProducer
+{
+	private int delay;
+	private int times;
+	private int currentIndex = -1;
+	private ArrayList<Icon> icons = new ArrayList<Icon>();
+	
+	/** FileProducer receives the String filename as a parameter. FileProducer
+	 *  will read int delay, int times and then all lines thereafter containing
+	 *  filepaths of JPG-files.  The files will then be stored as Icon objects in 
+	 *  the ArrayList <Icon> icons  
+	 * 
+	 * @param filename Name of file to be read
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+
+	public FileProducer(String filename) throws IOException, FileNotFoundException, IOException
+	{
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8")))
+		{
+			this.times = Integer.parseInt(br.readLine());
+			this.delay = Integer.parseInt(br.readLine());
+			
+			String iconName;
+			while ((iconName = br.readLine()) != null)
+			{
+				addIcon(iconName);
+			}
+			br.close();
+		}
+	}
+	
+	/** Receives the filepath of a picture file
+	 *  and adds it as an Icon object to the ArrayList <Icon> icons.  
+	 * 
+	 * @param str
+	 */
+	
+	public void addIcon (String str)
+	{
+		Icon icon = new ImageIcon(str);
+		
+		if (icon != null)
+			icons.add(icon);
+	}
+	
+	/** Returns a delay to be used between pictures. 
+	 * 
+	 */
+
+	public int delay()
+	{
+		return delay;
+	}
+	
+	/** Returns the number of times the sequence of 
+	 *  of Icon's in icons should be shown. 
+	 * 
+	 */
+
+	public int times()
+	{
+		return times;
+	}
+
+	/** Returns the number of elements stored in
+	 *  the ArrayList icons. 
+	 * 
+	 */
+	
+	public int size()
+	{
+		return (icons == null) ? 0 : icons.size();
+	}
+	
+	/** Returns the next Icon from the ArrayList <Icon> icons.
+	 * If there is no more Icon objects left or if the array 
+	 * is empty null is returned.
+	 * 
+	 */
+
+	public Icon nextIcon()
+	{
+		if (icons == null || icons.size() == 0)
+			return null;
+		currentIndex = (currentIndex + 1) % icons.size();
+		return icons.get(currentIndex);
+	}
+}

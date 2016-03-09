@@ -1,0 +1,91 @@
+package p2;
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+public class IconServer {
+	private ServerSocket socket;
+	private int port;
+	private Icon iconToSend = new ImageIcon();
+	private IconListener listener = new IconListener();
+	private IconManager manager;
+
+	public IconServer(int port, IconManager iconManager) {
+		iconManager.addManagerListener(listener);
+		new Connection(port).start();
+	}
+
+	public void setIcon(Icon icon) {
+		System.out.println("ZXC");
+		iconToSend = icon;
+	}
+
+	private class IconListener implements ManagerListener {
+		public void newIcon(Icon icon) {
+			setIcon(icon);
+		}
+	}
+
+	private class Connection extends Thread {
+		private int port;
+
+		public Connection(int port) {
+			this.port = port;
+		}
+
+		public void run() {
+			Socket socket = null;
+			System.out.println("Server running");
+			try (ServerSocket serverSocket = new ServerSocket(port)) {
+				while (true) {
+					try {
+						socket = serverSocket.accept();
+						System.out.println("Client connected");
+						new ClientHandler(socket);
+					} catch (IOException e) {
+						if (socket != null)
+							socket.close();
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Server stopped");
+		}
+	}
+
+	private class ClientHandler extends Thread {
+		private Socket socket;
+		private ObjectOutputStream outputStream;
+		private Icon prevIcon = null;
+
+		public ClientHandler(Socket socket) throws IOException {
+			this.socket = socket;
+			outputStream = new ObjectOutputStream(socket.getOutputStream());
+			start();
+		}
+
+		public void run() {
+			try {
+				while (true) {
+					if (iconToSend != prevIcon) {
+						System.out.println("ASD");
+						outputStream.writeObject(iconToSend);
+						prevIcon = iconToSend;
+					}
+				}
+			} catch (IOException e) {
+				try {
+					socket.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	}
+}

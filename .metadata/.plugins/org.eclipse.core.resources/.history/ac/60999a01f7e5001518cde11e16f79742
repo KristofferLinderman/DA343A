@@ -1,0 +1,35 @@
+package p2;
+
+import java.util.LinkedList;
+import javax.swing.Icon;
+
+public class IconManager extends Thread
+{
+	private Buffer <Icon> buffer;
+	private LinkedList <ManagerListener> list = new LinkedList <ManagerListener>();
+	
+	public IconManager (Buffer <Icon> buffer)
+	{
+		this.buffer = buffer;
+	}
+	
+	public void run()
+	{
+		Icon icon;
+		try
+		{
+			while ((icon = buffer.get()) != null)
+				for (ManagerListener ml : list)
+					ml.newIcon(icon);
+			
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void addManagerListener(ManagerListener listener)
+	{
+		list.add(listener);
+	}
+}

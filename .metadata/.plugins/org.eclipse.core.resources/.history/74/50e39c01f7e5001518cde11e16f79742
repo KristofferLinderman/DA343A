@@ -1,0 +1,41 @@
+package p2;
+
+import java.io.IOException;
+
+import javax.swing.Icon;
+
+
+public class P2Start
+{
+	public static void main(String[] args)
+	{
+
+		Buffer<Icon> iconBuffer = new Buffer<Icon>();
+		Buffer<IconProducer> producerBuffer = new Buffer<IconProducer>();
+
+		IconManager iconManager = new IconManager(iconBuffer);
+		
+		new IconServer(3445, iconManager);
+		
+		new ViewerWindow(new Viewer(iconManager, 640, 480), 100, 100);
+		new ViewerWindow(new Viewer(iconManager, 320, 320), 400, 800);
+
+		new ViewerWindow(new Viewer(new IconClient("localhost", 3445), 640, 480), 1200, 100);
+		new ViewerWindow(new Viewer(new IconClient("localhost", 3445), 320, 320), 1200, 800);
+		
+		iconManager.start();
+
+		Producer producer = new Producer(producerBuffer, iconBuffer);
+		producer.start();
+
+		IconProducerManager ipManager = new IconProducerManager(producerBuffer);
+		try
+		{
+			ipManager.addIconProducer(new FileProducer("files/new.txt"));
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+}

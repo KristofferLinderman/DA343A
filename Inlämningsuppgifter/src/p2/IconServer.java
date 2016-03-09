@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Icon;
+
 public class IconServer implements Runnable {
 	private IconManager iconManager;
 	private ServerSocket serverSocket;
@@ -35,6 +37,8 @@ public class IconServer implements Runnable {
 
 	private class Listener extends Thread implements Observer {
 		private ObjectOutputStream outputStream;
+		private Icon icon;
+		private boolean readyToSend;
 
 		public Listener(Socket socket) {
 			iconManager.addObserver(this);
@@ -45,12 +49,28 @@ public class IconServer implements Runnable {
 			}
 		}
 
+		public void run() {
+			while (true) {
+				synchronized (this) {
+					if (readyToSend) {
+						System.out.println(readyToSend + " 1");
+						try {
+							System.out.println("ASD");
+							outputStream.writeObject(icon);
+							outputStream.flush();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
 		public void update(Observable o, Object icon) {
-			try {
-				outputStream.writeObject(icon);
-				outputStream.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
+			synchronized (this) {
+				readyToSend = true;
+				System.out.println(readyToSend);
+				this.icon = (Icon) icon;
 			}
 		}
 	}

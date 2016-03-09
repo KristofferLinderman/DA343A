@@ -1,0 +1,36 @@
+package p2;
+
+/** IconProducerManager has a buffer that can contain objects
+ *  that implements the IconProducer interface. It can add objects
+ *  implementing the IconProducer interface to the buffer
+ *  
+ *   * @author johan
+ *
+ */
+
+public class IconProducerManager
+{
+	private Buffer<IconProducer> buffer = new Buffer<IconProducer>();
+
+	/** Creates an IconProducerManager with a buffer received as
+	 *  a parameter
+	 *  
+	 * @param buffer
+	 */
+	
+	public IconProducerManager(Buffer<IconProducer> buffer)
+	{
+		this.buffer = buffer;
+	}
+	
+	/** Adds and object implementing the IconProducer interface
+	 *  to the buffer
+	 * 
+	 * @param producer
+	 */
+
+	public void addIconProducer(IconProducer producer)
+	{
+		buffer.put(producer);
+	}
+}

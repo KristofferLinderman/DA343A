@@ -1,0 +1,17 @@
+package p2;
+
+import javax.swing.Icon;
+
+/** IconProducer is an interface with methods
+ *  for showing pictures.
+ * 
+ * @author johan
+ *
+ */
+
+public interface IconProducer {
+	public int delay();
+	public int times();
+	public int size();
+	public Icon nextIcon();
+}

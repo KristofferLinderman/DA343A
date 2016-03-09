@@ -1,0 +1,47 @@
+package p2;
+
+import java.util.LinkedList;
+
+/** Buffer is a class made for keeping objects for use with threads.
+ *  The methods are synchronized
+ * 
+ * @author johan
+ *
+ * @param <T> The sort of object the buffer with keep
+ */
+
+public class Buffer<T> {
+	private LinkedList<T> buffer = new LinkedList<T>();
+	
+	/** Adds an object to the list and notifies all running threads 
+	 *
+	 * @param obj
+	 */
+	
+	public synchronized void put(T obj) {
+		buffer.addLast(obj);
+		notifyAll();
+	}
+	
+	/** Returns the first object in the buffert and makes the thread
+	 * wait if the buffer is empty.
+	 * @return
+	 * @throws InterruptedException
+	 */
+	
+	public synchronized T get() throws InterruptedException {
+		while(buffer.isEmpty()) {
+			wait();
+		}
+		return buffer.removeFirst();
+	}
+	
+	/** Returns the size of the buffer
+	 * 
+	 * @return size of buffer
+	 */
+	
+	public int size() {
+		return buffer.size();
+	}
+}
